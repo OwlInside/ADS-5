@@ -10,21 +10,16 @@ class TPQueue {
       T data;
       ITEM *next;
     };
-private:
-  TPQueue::ITEM *create(const T&);
-  
-  ITEM *head;
-  ITEM *tail;
-public:
-  TPQueue() : head(nullptr), tail(nullptr) {}
-  
-  ~TPQueue();
-  
-  void push(const T &);
-  
-  T pop();
-  
-  void print() const;
+ private:
+    TPQueue::ITEM *create(const T&);
+    ITEM *head;
+    ITEM *tail;
+ public:
+    TPQueue() : head(nullptr), tail(nullptr) {}
+    ~TPQueue();
+    void push(const T &);
+    T pop();
+    void print() const;
 };
 template<typename T>
 typename TPQueue<T>::ITEM *TPQueue<T>::create(const T &data) {
@@ -48,24 +43,23 @@ void TPQueue<T>::push(const T &data) {
       temp->next = head;
       head = temp;
     } else {
-      while(temp->next) {
+      while (temp->next) {
         if (data.prior > temp->next->data.prior) {
           ITEM *present = create(data);
           present->next = temp->next;
           temp->next = present;
           break;
         } else {
-          temp = temp->next;
+            temp = temp->next;
         }
       }
     }
     if (!temp->next) {
       tail->next = create(data);
       tail = tail->next;
-    }
-    else {
-      head = create(data);
-      tail = head;
+    } else {
+        head = create(data);
+        tail = head;
     }
   }
   template<typename T>
@@ -85,7 +79,7 @@ void TPQueue<T>::push(const T &data) {
       std::cout << temp->data << "_";
       temp = temp->next;
     }
-    std::cout<<std::endl;
+    std::cout << std::endl;
   }
 struct SYM {
   char ch;
